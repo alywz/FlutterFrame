@@ -103,7 +103,7 @@ class HomeContentState extends State<HomeContent> {
   //有圈的Appbar
   AppBar getsecondappbar() {
     return AppBar(
-      leading: null,
+      leading: Icon(null),
       title: Text(
         "有圈",
         style: TextStyle(fontSize: 17),
@@ -115,6 +115,7 @@ class HomeContentState extends State<HomeContent> {
   //更多的Appbar
   AppBar getthirdappbar() {
     return AppBar(
+      leading: Icon(null),
       title: Text(
         "更多",
         style: TextStyle(fontSize: 17),
@@ -126,6 +127,7 @@ class HomeContentState extends State<HomeContent> {
   //我的Appbar
   AppBar getmineappbar() {
     return AppBar(
+      leading: Icon(null),
       title: Text(
         "我的",
         style: TextStyle(fontSize: 17),
