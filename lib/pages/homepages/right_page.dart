@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class RightPage extends StatelessWidget {
+  final arguments;
+
+  const RightPage({Key key, this.arguments}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,13 +24,15 @@ class RightPage extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: Center(
-        child: MaterialButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Icon(Icons.navigate_before, color: Colors.black, size: 64.0),
-        ),
+        child:GestureDetector(
+          child: Text(
+            this.arguments,
+            style: TextStyle(fontSize: 20,color: Colors.black),
+          ),
+          onTap:()=>Navigator.pop(context,"返回的参数")
+        )
       ),
     );
   }
+
 }

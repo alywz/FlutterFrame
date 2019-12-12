@@ -1,13 +1,12 @@
-import 'package:douban_app/pages/appbars/homepage_appbar.dart';
 import 'package:douban_app/pages/drawer_pager.dart';
 import 'package:flutter/material.dart';
 
-import 'components/smartdrawer.dart';
-import 'components/tabbar_item.dart';
+import 'components/bottom_navigationbar.dart';
 import 'pages/home_page.dart';
 import 'pages/mine_page.dart';
 import 'pages/second_page.dart';
 import 'pages/third_page.dart';
+import 'routes/myroutes.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,13 +16,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
-      title: "Home Page",
+      initialRoute: '/',//配置默认访问路径
+      onGenerateRoute: onGenerateRoute,//必须加上这一行，固定写法
+      title: "MaterialApp",
       theme: ThemeData(
         primaryColor: Colors.yellow,
-//        highlightColor: Colors.transparent,
-////        splashColor: Colors.transparent,
       ),
       home: HomeContent(),
+//        routes: myroutes,
     );
   }
 }
@@ -39,10 +39,8 @@ class HomeContent extends StatefulWidget {
 ///视图容器状态
 class HomeContentState extends State<HomeContent> {
   int _currentIndex = 0;
-  final List<Widget> homePages = [];
-  final List<AlyBottomBarItem> tabbarItems = [];
-
-  PageController pageControler = PageController(keepPage: false);
+  final List<Widget> _homePages = [];
+  final PageController _pageControler = PageController(keepPage: false);
 
   final List<AppBar> _appbars = [];
 
@@ -51,14 +49,10 @@ class HomeContentState extends State<HomeContent> {
     // TODO: implement initState
     super.initState();
     print("初始化");
-    homePages.add(HomePage());
-    homePages.add(SecondPage());
-    homePages.add(ThirdPage());
-    homePages.add(MinePage());
-    tabbarItems.add(AlyBottomBarItem("首页", "home"));
-    tabbarItems.add(AlyBottomBarItem("智能", "smart"));
-    tabbarItems.add(AlyBottomBarItem("统计", "statistics"));
-    tabbarItems.add(AlyBottomBarItem("我的", "my"));
+    _homePages.add(HomePage());
+    _homePages.add(SecondPage());
+    _homePages.add(ThirdPage());
+    _homePages.add(MinePage());
     _appbars.add(gethomeappbar());
     _appbars.add(getsecondappbar());
     _appbars.add(getthirdappbar());
@@ -68,54 +62,48 @@ class HomeContentState extends State<HomeContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appbars[_currentIndex],
-      body: PageView(
-        controller: pageControler,
-        children: homePages,
-//        physics: NeverScrollableScrollPhysics(),
-        onPageChanged: ((index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        }),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        elevation: 2,
-        currentIndex: _currentIndex,
-        selectedFontSize: 12,
-        unselectedFontSize: 12,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black38,
-        type: BottomNavigationBarType.fixed,
-        items: tabbarItems,
-        onTap: (index) {
-          pageControler.jumpToPage(index);
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
-      drawer:MyDrawer()
+        appBar: _appbars[_currentIndex],
+        body: getPageView(),
+        bottomNavigationBar: AlyBottomNavigationBar(
+            currentIndex: _currentIndex, pageControler: _pageControler),
+        drawer: MyDrawer());
+  }
+
+  //body PageView部分
+  PageView getPageView() {
+    return PageView(
+      controller: _pageControler,
+      children: _homePages,
+      onPageChanged: ((index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      }),
     );
   }
 
-
-
+  //首页的Appbar
   AppBar gethomeappbar() {
     return AppBar(
-      elevation: 0,
-      leading: IconButton(icon: Icon(Icons.menu), onPressed: _homeMenuPress),
+      leading: Builder(builder: (BuildContext context) {
+        return IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            });
+      }),
       title: Text("首页", style: TextStyle(fontSize: 17)),
       centerTitle: true,
       actions: <Widget>[
-        IconButton(icon: Icon(Icons.search), onPressed: _hometitlePress)
+        IconButton(icon: Icon(Icons.search), onPressed: () => print("搜索"))
       ],
     );
   }
 
+  //有圈的Appbar
   AppBar getsecondappbar() {
     return AppBar(
+      leading: null,
       title: Text(
         "有圈",
         style: TextStyle(fontSize: 17),
@@ -124,6 +112,7 @@ class HomeContentState extends State<HomeContent> {
     );
   }
 
+  //更多的Appbar
   AppBar getthirdappbar() {
     return AppBar(
       title: Text(
@@ -134,6 +123,7 @@ class HomeContentState extends State<HomeContent> {
     );
   }
 
+  //我的Appbar
   AppBar getmineappbar() {
     return AppBar(
       title: Text(
@@ -142,15 +132,5 @@ class HomeContentState extends State<HomeContent> {
       ),
       centerTitle: true,
     );
-  }
-
-  //  首页右上角搜索按钮
-  void _hometitlePress() {
-    print("点击了搜索");
-  }
-
-//首页菜单按钮
-  void _homeMenuPress() {
-    print("点击了菜单");
   }
 }

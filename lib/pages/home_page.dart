@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'homepages/test_page.dart';
+import 'homepages/right_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   int num = 0;
 
   @override
@@ -37,20 +38,24 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
             setState(() {
               num++;
               if (num > 2) {
-                Navigator.of(context,rootNavigator: false).push(CupertinoPageRoute(builder: (context) {return RightPage();}));
-//                Navigator.push(context, CupertinoPageRoute(builder: (context) {return RightPage();}));
-//                 Navigator.of(context).push(MaterialPageRoute(builder: (context) {return RightPage();}));
-//                Navigator.push(context, MaterialPageRoute(builder: (context) {return RightPage();}));
-//                Navigator.push(context, AlyCustomPageRouteBuilder(RightPage()));
+//                Navigator.of(context,rootNavigator: false).push(CupertinoPageRoute(builder: (context) {return RightPage();}));
+                Navigator.pushNamed(context, "/rightpage", arguments: "传递的参数")
+                    .then((value) {
+                  print(value);
+                });
+//              Future result= Navigator.pushNamed(context, "/rightpage",arguments: "传递的参数");
+//              if(result!=null){
+//                result.then((value){
+//                  print("哈哈哈$value");
+//                });
+//              }
               }
             });
           }),
     );
   }
 
-
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
-
