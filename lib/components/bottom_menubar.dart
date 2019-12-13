@@ -1,12 +1,9 @@
-import 'package:douban_app/components/tabbar_item.dart';
 import 'package:douban_app/pages/drawer_pager.dart';
 import 'package:douban_app/pages/home_page.dart';
 import 'package:douban_app/pages/mine_page.dart';
 import 'package:douban_app/pages/second_page.dart';
 import 'package:douban_app/pages/third_page.dart';
 import 'package:flutter/material.dart';
-
-import 'bottom_navigationbar_item.dart';
 
 ///有状态StatefulWidget
 ///继承于 StatefulWidget，通过 State 的 build 方法去构建控件
