@@ -64,6 +64,10 @@ class BotomeMenumBarPageState extends State<BotomeMenumBarPage> {
               child: const Icon(Icons.add, color: Colors.black),
               onPressed: () {
                 print("add press ");
+                Navigator.pushNamed(context, "/rightpage", arguments: "传递的参数")
+                    .then((value) {
+                  print(value);
+                });
               },
             ),
             //其他菜单栏
@@ -92,6 +96,12 @@ class BotomeMenumBarPageState extends State<BotomeMenumBarPage> {
     return PageView(
       controller: _pageControler,
       children: _homePages,
+      //禁止滑动
+//      physics: NeverScrollableScrollPhysics(),
+      //带弹性的滑动
+//      physics: BouncingScrollPhysics(),
+      //默认的滑动
+      physics: AlwaysScrollableScrollPhysics(),
       onPageChanged: ((index) {
         setState(() {
           _currentIndex = index;
@@ -152,6 +162,7 @@ class BotomeMenumBarPageState extends State<BotomeMenumBarPage> {
           if (index != _currentIndex) {
             setState(() {
               _currentIndex = index;
+              _pageControler.jumpToPage(_currentIndex);
             });
           }
         },

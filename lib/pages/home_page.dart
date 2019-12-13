@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'homepages/right_page.dart';
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -22,36 +20,33 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Container(
-          child: Text(
-            "计数器$num",
-            style: TextStyle(
-                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "计数器$num",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+              RaisedButton(
+                  child: Text("增加"),
+                  onPressed: () {
+                    setState(() {
+                      num++;
+                      if (num > 2) {
+                        Navigator.pushNamed(context, "/rightpage",
+                            arguments: "传递的参数")
+                            .then((value) {
+                          print(value);
+                        });
+                      }
+                    });
+                  })
+            ]),
       ),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {
-            setState(() {
-              num++;
-              if (num > 2) {
-//                Navigator.of(context,rootNavigator: false).push(CupertinoPageRoute(builder: (context) {return RightPage();}));
-                Navigator.pushNamed(context, "/rightpage", arguments: "传递的参数")
-                    .then((value) {
-                  print(value);
-                });
-//              Future result= Navigator.pushNamed(context, "/rightpage",arguments: "传递的参数");
-//              if(result!=null){
-//                result.then((value){
-//                  print("哈哈哈$value");
-//                });
-//              }
-              }
-            });
-          }),
     );
   }
 

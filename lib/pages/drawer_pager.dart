@@ -20,6 +20,7 @@ class _MyDrawerState extends State<MyDrawer> {
           }
         },
         child: ListView(
+          physics: BouncingScrollPhysics(),
           padding: EdgeInsets.zero,
           children: <Widget>[
             getDrawerHeader(),

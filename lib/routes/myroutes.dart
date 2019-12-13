@@ -5,17 +5,7 @@ import 'package:flutter/material.dart';
 //配置路由规则
 final myroutes = {
   //Map<String, WidgetBuilder>
-  "/rightpage": (context,{arguments}) => RightPage(arguments:arguments),
-//  "/home": (context) => HomePage(),
-//  "/login": (context) => LoginPage(),
-//  "/mine": (context) => MinePage(),
-//  "/bank": (context) => BankCardPage(),
-//  "/card": (context) => CardSubmit(),
-//  "/kefu": (context) => ContactKefu(),
-//  "/order": (context) => OrderPage(),
-//  "/evaluation": (context) => Edevaluation(),
-//  "/wallet": (context) => Wallet(),
-//  '/pagetest': (context,{arguments}) => PageTest(arguments:arguments),  //通过这种方式可以配置传递参数
+  "/rightpage": (context,{arguments}) => RightPage(arguments:arguments),//通过这种方式可以配置传递参数
 };
 
 // 如果你要把路由抽离出去，必须写下面这一堆的代码，不用理解什么意思
