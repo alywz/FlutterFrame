@@ -7,9 +7,9 @@ class AlyBottomBarItem extends BottomNavigationBarItem {
           title: Text(title,style: TextStyle(fontSize: 12),),
           icon: Image.asset("assets/images/${iconname}.png"),
           activeIcon: Image.asset("assets/images/${iconname}_select.png"),
-
         );
 }
+
 
 ///Aly 自定义 TabBar 的 Tab 底部的item
 class AlyTabItem extends Tab {
