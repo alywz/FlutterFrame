@@ -64,7 +64,7 @@ class BotomeMenumBarPageState extends State<BotomeMenumBarPage> {
               child: const Icon(Icons.add, color: Colors.black),
               onPressed: () {
                 print("add press ");
-                Navigator.pushNamed(context, "/rightpage", arguments: "传递的参数")
+                Navigator.pushNamed(context, "/nestscrollviewpage", arguments: "传递的参数")
                     .then((value) {
                   print(value);
                 });
