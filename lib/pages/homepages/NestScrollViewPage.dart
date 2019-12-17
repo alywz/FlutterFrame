@@ -97,7 +97,7 @@ class NestScrollViewPage extends StatelessWidget {
           maxCrossAxisExtent: 200.0,
           mainAxisSpacing: 10.0,
           crossAxisSpacing: 10.0,
-          childAspectRatio: 4.0,
+          childAspectRatio: 2.0,
         ),
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
@@ -111,7 +111,7 @@ class NestScrollViewPage extends StatelessWidget {
         ),
       ),
       SliverFixedExtentList(
-        itemExtent: 50.0,
+        itemExtent: 100.0,
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
             return Container(
@@ -120,6 +120,7 @@ class NestScrollViewPage extends StatelessWidget {
               child: Text('list item $index'),
             );
           },
+          childCount: 20
         ),
       ),
     ];

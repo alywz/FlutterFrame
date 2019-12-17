@@ -1,0 +1,13 @@
+import 'package:douban_app/bean/steps_entity.dart';
+
+class EntityFactory {
+  static T generateOBJ<T>(json) {
+    if (1 == 0) {
+      return null;
+    } else if (T.toString() == "StepsEntity") {
+      return StepsEntity.fromJson(json) as T;
+    } else {
+      return null;
+    }
+  }
+}
